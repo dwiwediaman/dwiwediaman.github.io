@@ -1,5 +1,5 @@
 const { chromium } = require("playwright");
-const path = require("path");
+const path = require("node:path");
 const url = "file://" + path.resolve(__dirname, "index.html");
 
 (async () => {
@@ -7,6 +7,7 @@ const url = "file://" + path.resolve(__dirname, "index.html");
   const ctx = await browser.newContext({
     viewport: { width: 1440, height: 900 },
     deviceScaleFactor: 2,
+    colorScheme: "dark",
   });
   const page = await ctx.newPage();
   await page.goto(url, { waitUntil: "networkidle" });

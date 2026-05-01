@@ -6,6 +6,13 @@ const fileUrl = "file://" + path.resolve(__dirname, "../index.html");
 
 test.describe("Portfolio site — end-to-end", () => {
   test.beforeEach(async ({ page }) => {
+    // Pin colorScheme + storage so the FOUC-prevention <head> script is
+    // deterministic across runs — otherwise prefers-color-scheme: light on
+    // some CI runners would land us in light mode unexpectedly.
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.addInitScript(() => {
+      try { localStorage.removeItem("rd-portfolio-theme"); } catch { /* */ }
+    });
     await page.goto(fileUrl, { waitUntil: "networkidle" });
   });
 
@@ -69,10 +76,51 @@ test.describe("Portfolio site — end-to-end", () => {
     await expect(groups).toHaveCount(4);
   });
 
-  test("contact CTA exposes email mailto link", async ({ page }) => {
+  test("contact CTA exposes personal email mailto link (not work email)", async ({ page }) => {
     const mailto = page.locator('a[href^="mailto:"]').first();
     await expect(mailto).toBeVisible();
-    expect(await mailto.getAttribute("href")).toBe("mailto:rahul.dwiwedi@decisionpoint.in");
+    expect(await mailto.getAttribute("href")).toBe("mailto:dwiwediaman@gmail.com");
+    // Work email must NOT appear anywhere on the live page
+    const html = await page.content();
+    expect(html).not.toContain("rahul.dwiwedi@decisionpoint.in");
+  });
+
+  test("external profile links resolve to specific profiles, not vendor homepages", async ({ page }) => {
+    const linkedIn = await page.locator('a[href*="linkedin.com"]').first().getAttribute("href");
+    const gitHub = await page.locator('a[href*="github.com"]').first().getAttribute("href");
+    expect(linkedIn).toMatch(/linkedin\.com\/in\//);
+    expect(linkedIn).not.toBe("https://www.linkedin.com/");
+    expect(gitHub).toMatch(/github\.com\/[\w-]+/);
+    expect(gitHub).not.toBe("https://github.com/");
+  });
+
+  test("OpenGraph + Twitter card meta is wired correctly", async ({ page }) => {
+    const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+    const ogUrl = await page.locator('meta[property="og:url"]').getAttribute("content");
+    const twCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
+    expect(ogImage).toMatch(/og-image\.png$/);
+    expect(ogUrl).toBe("https://dwiwediaman.github.io/");
+    expect(twCard).toBe("summary_large_image");
+  });
+
+  test("favicon and structured data are present", async ({ page }) => {
+    await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
+    const ld = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(ld);
+    expect(parsed["@type"]).toBe("Person");
+    expect(parsed.name).toBe("Rahul Dwiwedi");
+    expect(parsed.sameAs).toContain("https://github.com/dwiwediaman");
+  });
+
+  test("skip-to-content link exists and targets main", async ({ page }) => {
+    const skip = page.locator(".skip-link");
+    await expect(skip).toHaveCount(1);
+    expect(await skip.getAttribute("href")).toBe("#top");
+  });
+
+  test("theme toggle exposes aria-pressed state", async ({ page }) => {
+    const btn = page.locator("#themeToggle");
+    await expect(btn).toHaveAttribute("aria-pressed", /true|false/);
   });
 
   test("role title is consistent across the page (Technical Lead, no Lead Architect)", async ({ page }) => {
@@ -118,8 +166,8 @@ test.describe("Portfolio site — end-to-end", () => {
     expect(visible).toBe(true);
   });
 
-  test("status pill shows Available", async ({ page }) => {
-    await expect(page.locator(".status-pill")).toContainText("Available");
+  test("status pill signals availability", async ({ page }) => {
+    await expect(page.locator(".status-pill")).toContainText(/Open|Available/i);
   });
 
   test("year stamp updates dynamically", async ({ page }) => {

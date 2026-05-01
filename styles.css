@@ -60,6 +60,14 @@
    ============================================================= */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -100,6 +108,45 @@ body::before {
 }
 
 main, .nav, .footer { position: relative; z-index: 1; }
+
+/* =============================================================
+   Accessibility: skip link + focus rings
+   ============================================================= */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 16px;
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.btn:focus-visible {
+  outline-offset: 3px;
+}
+a:focus-visible {
+  outline-offset: 4px;
+}
+.theme-toggle:focus-visible,
+.nav-links a:focus-visible {
+  outline-offset: 2px;
+}
 
 /* =============================================================
    Nav
@@ -508,29 +555,34 @@ main, .nav, .footer { position: relative; z-index: 1; }
   color: var(--accent);
   font-weight: 600;
 }
-.metric-row {
+.impact-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-  padding: 16px;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.impact {
+  position: relative;
+  padding: 14px 16px 14px 18px;
   background: var(--bg-alt);
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
-.metric-num {
+.impact-num {
   display: block;
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 17px;
   color: var(--fg);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
 }
-.metric-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-dim);
-  letter-spacing: 0.04em;
+.impact-label {
+  font-size: 13px;
+  color: var(--fg-muted);
+  line-height: 1.45;
+  display: block;
 }
 .stack-row {
   display: flex;
@@ -619,9 +671,9 @@ main, .nav, .footer { position: relative; z-index: 1; }
 }
 .arch-svg .edge line {
   stroke: var(--line-strong);
-  stroke-width: 1.2;
-  stroke-dasharray: 4 4;
+  stroke-width: 1.6;
 }
+[data-theme="light"] .arch-svg .edge line { stroke: #9ca0ad; }
 
 /* =============================================================
    Bento (Personal Projects)
@@ -759,12 +811,9 @@ main, .nav, .footer { position: relative; z-index: 1; }
   white-space: pre;
 }
 .c-key  { color: var(--accent); }
-.c-str  { color: #6dd6c4; }
-.c-num  { color: #f5d76e; }
-.c-bool { color: #c084fc; font-weight: 500; }
-[data-theme="light"] .c-str { color: #0c8a72; }
-[data-theme="light"] .c-num { color: #b58a00; }
-[data-theme="light"] .c-bool { color: #7e3af2; }
+.c-str,
+.c-num,
+.c-bool { color: var(--fg-muted); }
 
 .dive-notes {
   background: var(--bg-elev);
@@ -869,7 +918,16 @@ main, .nav, .footer { position: relative; z-index: 1; }
   max-width: 520px;
 }
 .contact-actions {
-  margin-bottom: 28px;
+  margin-bottom: 16px;
+}
+.contact-tip {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--fg-dim);
+  letter-spacing: 0.02em;
+  margin: 0 auto 28px;
+  max-width: 480px;
+  line-height: 1.5;
 }
 .contact-meta {
   display: inline-flex;

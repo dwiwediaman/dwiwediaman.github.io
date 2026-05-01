@@ -20,6 +20,7 @@ const viewports = [
     const ctx = await browser.newContext({
       viewport: { width: vp.width, height: vp.height },
       deviceScaleFactor: 2,
+      colorScheme: "dark",
     });
     const page = await ctx.newPage();
     await page.goto(url, { waitUntil: "networkidle" });

@@ -5,19 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rahul Dwiwedi — Technical Lead, AI Systems</title>
   <meta name="description" content="Technical Lead architecting production-grade AI/LLM analytics platforms for enterprise CPG/FMCG clients." />
+  <meta name="author" content="Rahul Dwiwedi" />
+  <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://dwiwediaman.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dwiwediaman.github.io/" />
   <meta property="og:title" content="Rahul Dwiwedi — Technical Lead, AI Systems" />
-  <meta property="og:description" content="Building production-grade AI systems for the enterprise." />
+  <meta property="og:description" content="Building production-grade AI/LLM analytics platforms for the enterprise." />
+  <meta property="og:image" content="https://dwiwediaman.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rahul Dwiwedi — Technical Lead, AI Systems" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rahul Dwiwedi — Technical Lead, AI Systems" />
+  <meta name="twitter:description" content="Building production-grade AI/LLM analytics platforms for the enterprise." />
+  <meta name="twitter:image" content="https://dwiwediaman.github.io/og-image.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- Pre-paint theme application: prevents FOUC on light-pref users -->
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem("rd-portfolio-theme");
+        var prefersLight = globalThis.matchMedia && globalThis.matchMedia("(prefers-color-scheme: light)").matches;
+        if (s === "light" || (!s && prefersLight)) {
+          document.documentElement.dataset.theme = "light";
+        }
+      } catch { /* localStorage disabled — fall back to default dark */ }
+    })();
+  </script>
+
+  <!-- JSON-LD: Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rahul Dwiwedi",
+    "jobTitle": "Technical Lead, AI Systems",
+    "worksFor": { "@type": "Organization", "name": "Decisionpoint" },
+    "url": "https://dwiwediaman.github.io/",
+    "email": "mailto:dwiwediaman@gmail.com",
+    "sameAs": [
+      "https://github.com/dwiwediaman",
+      "https://www.linkedin.com/in/rahul-dwiwedi/"
+    ],
+    "knowsAbout": [
+      "Large Language Models",
+      "Prompt Engineering",
+      "Retrieval-Augmented Generation",
+      "Azure Databricks",
+      "CPG Analytics",
+      "Multi-Agent Systems"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Global SVG defs (so all <svg> can reference markers) -->
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- Global SVG defs (so all <svg> can reference markers).
+       Fill uses currentColor; .arch-svg sets color: var(--line-strong). -->
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
     <defs>
-      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2a2d38"/>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
       </marker>
     </defs>
   </svg>
@@ -40,8 +105,8 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav-cta">
-        <span class="status-pill"><span class="status-dot"></span>Available</span>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+        <span class="status-pill" title="Open to consulting and full-time roles"><span class="status-dot"></span>Open to inquiries</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" aria-pressed="false" type="button">
           <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -67,7 +132,7 @@
           </p>
           <div class="hero-cta">
             <a href="#work" class="btn btn-primary">View Featured Work <span aria-hidden="true">↓</span></a>
-            <a href="mailto:rahul.dwiwedi@decisionpoint.in" class="btn btn-ghost">Get in Touch</a>
+            <a href="mailto:dwiwediaman@gmail.com" class="btn btn-ghost">Get in Touch</a>
           </div>
         </div>
 
@@ -82,7 +147,7 @@
             <div class="kv"><span class="k">domain</span><span class="v">CPG · FMCG · RGM</span></div>
             <div class="kv"><span class="k">stack</span><span class="v">GPT-4o · Databricks · Python</span></div>
             <div class="kv"><span class="k">platforms_owned</span><span class="v accent">2</span></div>
-            <div class="kv"><span class="k">years</span><span class="v accent">5+</span></div>
+            <div class="kv"><span class="k">scope</span><span class="v">arch → prod ownership</span></div>
             <div class="kv"><span class="k">status</span><span class="v live">● shipping</span></div>
           </div>
         </aside>
@@ -136,11 +201,15 @@
                 <li>Architected multi-stage prompt pipeline with grounded retrieval and answer validation.</li>
                 <li>Owned cost discipline — token budgets per question, model routing, response caching.</li>
               </ul>
-              <div class="metric-row">
-                <div class="metric"><span class="metric-num">100+</span><span class="metric-label">Datasets orchestrated</span></div>
-                <div class="metric"><span class="metric-num">GPT-4o</span><span class="metric-label">Reasoning model</span></div>
-                <div class="metric"><span class="metric-num">YAML</span><span class="metric-label">Config-as-code</span></div>
-                <div class="metric"><span class="metric-num">Azure</span><span class="metric-label">Databricks runtime</span></div>
+              <div class="impact-row">
+                <div class="impact">
+                  <span class="impact-num">Days</span>
+                  <span class="impact-label">New domain rollout — was sprints, now a YAML diff</span>
+                </div>
+                <div class="impact">
+                  <span class="impact-num">100%</span>
+                  <span class="impact-label">Answers grounded — citations enforced at framework level, not runtime</span>
+                </div>
               </div>
               <div class="stack-row">
                 <span>Python</span><span>SQL / Spark</span><span>GPT-4o</span><span>Azure Databricks</span><span>Prompt Engineering</span><span>RAG</span>
@@ -152,45 +221,50 @@
                 <span class="diagram-label">SYSTEM ARCHITECTURE</span>
                 <span class="diagram-id">deep-research.v3</span>
               </div>
-              <svg viewBox="0 0 380 460" class="arch-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deep Research data flow diagram">
+              <svg viewBox="0 0 380 500" class="arch-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deep Research data flow diagram">
                 <!-- nodes -->
                 <g class="node">
-                  <rect x="120" y="14" width="140" height="44" rx="8"/>
-                  <text x="190" y="40" text-anchor="middle">Business Question</text>
+                  <rect x="120" y="10" width="140" height="44" rx="8"/>
+                  <text x="190" y="36" text-anchor="middle">Business Question</text>
                 </g>
                 <g class="node">
-                  <rect x="120" y="92" width="140" height="44" rx="8"/>
-                  <text x="190" y="118" text-anchor="middle">Query Router</text>
+                  <rect x="120" y="80" width="140" height="44" rx="8"/>
+                  <text x="190" y="106" text-anchor="middle">Query Router</text>
                 </g>
                 <g class="node accent">
-                  <rect x="20" y="170" width="140" height="44" rx="8"/>
-                  <text x="90" y="196" text-anchor="middle">RAG · Vector Index</text>
+                  <rect x="20" y="150" width="140" height="44" rx="8"/>
+                  <text x="90" y="176" text-anchor="middle">RAG · Vector Index</text>
                 </g>
                 <g class="node accent">
-                  <rect x="220" y="170" width="140" height="44" rx="8"/>
-                  <text x="290" y="196" text-anchor="middle">YAML Framework</text>
+                  <rect x="220" y="150" width="140" height="44" rx="8"/>
+                  <text x="290" y="176" text-anchor="middle">YAML Framework</text>
                 </g>
                 <g class="node">
-                  <rect x="120" y="248" width="140" height="44" rx="8"/>
-                  <text x="190" y="274" text-anchor="middle">LLM Planner</text>
+                  <rect x="120" y="220" width="140" height="44" rx="8"/>
+                  <text x="190" y="246" text-anchor="middle">LLM Planner</text>
                 </g>
                 <g class="node">
-                  <rect x="120" y="326" width="140" height="44" rx="8"/>
-                  <text x="190" y="352" text-anchor="middle">SQL · Spark Exec</text>
+                  <rect x="120" y="290" width="140" height="44" rx="8"/>
+                  <text x="190" y="316" text-anchor="middle">SQL · Spark Exec</text>
+                </g>
+                <g class="node accent">
+                  <rect x="120" y="360" width="140" height="44" rx="8"/>
+                  <text x="190" y="386" text-anchor="middle">Citation · Guard</text>
                 </g>
                 <g class="node strong">
-                  <rect x="120" y="404" width="140" height="44" rx="8"/>
-                  <text x="190" y="430" text-anchor="middle">Validated Insight</text>
+                  <rect x="120" y="430" width="140" height="44" rx="8"/>
+                  <text x="190" y="456" text-anchor="middle">Validated Insight</text>
                 </g>
                 <!-- edges -->
                 <g class="edge">
-                  <line x1="190" y1="58" x2="190" y2="92" marker-end="url(#arrow)"/>
-                  <line x1="160" y1="136" x2="100" y2="170" marker-end="url(#arrow)"/>
-                  <line x1="220" y1="136" x2="280" y2="170" marker-end="url(#arrow)"/>
-                  <line x1="100" y1="214" x2="160" y2="248" marker-end="url(#arrow)"/>
-                  <line x1="280" y1="214" x2="220" y2="248" marker-end="url(#arrow)"/>
-                  <line x1="190" y1="292" x2="190" y2="326" marker-end="url(#arrow)"/>
-                  <line x1="190" y1="370" x2="190" y2="404" marker-end="url(#arrow)"/>
+                  <line x1="190" y1="54" x2="190" y2="80" marker-end="url(#arrow)"/>
+                  <line x1="160" y1="124" x2="100" y2="150" marker-end="url(#arrow)"/>
+                  <line x1="220" y1="124" x2="280" y2="150" marker-end="url(#arrow)"/>
+                  <line x1="100" y1="194" x2="160" y2="220" marker-end="url(#arrow)"/>
+                  <line x1="280" y1="194" x2="220" y2="220" marker-end="url(#arrow)"/>
+                  <line x1="190" y1="264" x2="190" y2="290" marker-end="url(#arrow)"/>
+                  <line x1="190" y1="334" x2="190" y2="360" marker-end="url(#arrow)"/>
+                  <line x1="190" y1="404" x2="190" y2="430" marker-end="url(#arrow)"/>
                 </g>
               </svg>
             </div>
@@ -263,11 +337,15 @@
                 <li>Built validation layer that catches hallucinations before user-facing reply.</li>
                 <li>Configurable per client via YAML — no code change for new domain rollouts.</li>
               </ul>
-              <div class="metric-row">
-                <div class="metric"><span class="metric-num">Multi-tenant</span><span class="metric-label">Per-client config</span></div>
-                <div class="metric"><span class="metric-num">Grounded</span><span class="metric-label">Hallucination guarded</span></div>
-                <div class="metric"><span class="metric-num">YAML</span><span class="metric-label">Domain rollout</span></div>
-                <div class="metric"><span class="metric-num">PR-driven</span><span class="metric-label">Release flow</span></div>
+              <div class="impact-row">
+                <div class="impact">
+                  <span class="impact-num">Multi-tenant</span>
+                  <span class="impact-label">Single codebase, per-client domain rules — no per-client forks</span>
+                </div>
+                <div class="impact">
+                  <span class="impact-num">Validation-gated</span>
+                  <span class="impact-label">Hallucinations blocked pre-reply, not detected post-hoc</span>
+                </div>
               </div>
               <div class="stack-row">
                 <span>Python</span><span>GPT-4o</span><span>Vector Search</span><span>Prompt Eng.</span><span>Eval Harness</span><span>YAML</span>
@@ -312,7 +390,7 @@
             <p>Match-day fantasy team optimizer. Web research, expert-consensus scraping, weather and pitch context.</p>
             <div class="card-stat">
               <span class="card-stat-num">76.8%</span>
-              <span class="card-stat-label">efficiency · best-of-20 sim</span>
+              <span class="card-stat-label">peak-team efficiency · best-of-20 internal sim, vs ~50% random-baseline</span>
             </div>
           </article>
 
@@ -463,17 +541,21 @@
         <h2 class="contact-title">Let's build something<br/>worth shipping.</h2>
         <p class="contact-sub">
           Open to consulting on AI/LLM platforms, prompt pipelines, and
-          enterprise analytics architecture. Email is fastest.
+          enterprise analytics architecture. Reply within 48 hours, weekdays.
         </p>
         <div class="contact-actions">
-          <a class="btn btn-primary btn-lg" href="mailto:rahul.dwiwedi@decisionpoint.in">
-            rahul.dwiwedi@decisionpoint.in <span aria-hidden="true">→</span>
+          <a class="btn btn-primary btn-lg" href="mailto:dwiwediaman@gmail.com?subject=Architecture%20review%20%E2%80%94%20%5Byour%20context%5D">
+            dwiwediaman@gmail.com <span aria-hidden="true">→</span>
           </a>
         </div>
+        <p class="contact-tip">
+          Tip — drop a one-liner on your stack and the problem you're solving;
+          I'll come back with a concrete next step.
+        </p>
         <div class="contact-meta">
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/rahul-dwiwedi/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <span class="dot-sep" aria-hidden="true">·</span>
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href="https://github.com/dwiwediaman" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <span class="dot-sep" aria-hidden="true">·</span>
           <span>Bengaluru / Remote</span>
         </div>
