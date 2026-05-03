@@ -106,7 +106,6 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#projects">Projects</a>
-        <a href="#deep-dive">Deep Dive</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -192,6 +191,26 @@
             with hallucination-gated validation).
           </p>
         </header>
+
+        <!-- Architectural principles backing the platform -->
+        <ul class="principles" aria-label="Architectural principles">
+          <li>
+            <span class="principle-key">domain velocity</span>
+            <span class="principle-val">New client domains ship as a YAML diff — days, not sprints.</span>
+          </li>
+          <li>
+            <span class="principle-key">auditable behavior</span>
+            <span class="principle-val">Prompts, token caps, validation rules — all version-controlled.</span>
+          </li>
+          <li>
+            <span class="principle-key">cost discipline</span>
+            <span class="principle-val">Token budgets declared up front. PRs surface cost changes.</span>
+          </li>
+          <li>
+            <span class="principle-key">safe rollouts</span>
+            <span class="principle-val">Citation &amp; grounding guards required by the framework, not optional.</span>
+          </li>
+        </ul>
 
         <!-- Capability 1: Deep Research -->
         <article class="feature">
@@ -425,66 +444,11 @@
       </div>
     </section>
 
-    <!-- ========== TECHNICAL DEEP DIVE ========== -->
-    <section id="deep-dive" class="section">
-      <div class="container">
-        <header class="section-header">
-          <div class="meta-line"><span class="meta-bar"></span><span>04 / Technical Deep Dive</span></div>
-          <h2 class="section-title">Configuration as the contract.</h2>
-          <p class="section-lede">An architectural pattern I lean on: analytical frameworks defined in declarative config, not code. Every agent — router, planner, validator — reads the same shape, so a new client domain ships as a config diff instead of an engineering project. The example below is generic; production internals are not shown.</p>
-        </header>
-
-        <div class="dive-grid">
-          <div class="code-block" aria-label="Illustrative analytical framework configuration">
-            <div class="code-head">
-              <span class="code-file">frameworks/retail-analytics.example.yaml</span>
-              <span class="code-lang">YAML · ILLUSTRATIVE</span>
-            </div>
-<pre class="code-body"><span class="c-key">framework</span>: retail_analytics
-<span class="c-key">version</span>: <span class="c-str">"semver"</span>
-
-<span class="c-key">datasets</span>:
-  - <span class="c-key">id</span>: transactions
-    <span class="c-key">grain</span>: [date, store, sku]
-    <span class="c-key">measures</span>: [units, revenue, on_promo]
-  - <span class="c-key">id</span>: product_master
-    <span class="c-key">grain</span>: [sku]
-    <span class="c-key">columns</span>: [brand, category, segment]
-
-<span class="c-key">hierarchies</span>:
-  <span class="c-key">product</span>: [category, segment, brand, sku]
-  <span class="c-key">geo</span>:     [region, state, city, store]
-  <span class="c-key">time</span>:    [year, quarter, month, week, date]
-
-<span class="c-key">prompts</span>:
-  <span class="c-key">router</span>:    prompts/router.j2
-  <span class="c-key">planner</span>:   prompts/planner.j2
-  <span class="c-key">validator</span>: prompts/validator.j2
-
-<span class="c-key">guards</span>:
-  <span class="c-key">max_tokens_per_question</span>: <span class="c-num">12000</span>
-  <span class="c-key">require_citation</span>: <span class="c-bool">true</span>
-  <span class="c-key">block_on_grounding_fail</span>: <span class="c-bool">true</span></pre>
-          </div>
-
-          <aside class="dive-notes" aria-label="Why config-as-contract">
-            <h4>Why config-as-contract?</h4>
-            <ol class="dive-list">
-              <li><strong>Domain velocity.</strong> A new client domain ships in days, not sprints — change YAML, not code.</li>
-              <li><strong>Auditable behavior.</strong> Every prompt version, token cap, and validation rule is in version control.</li>
-              <li><strong>Cost discipline.</strong> Token budgets are declared, not implicit. PRs surface cost changes upfront.</li>
-              <li><strong>Safe rollouts.</strong> Guards (citation, grounding) are required by the framework, not optional code paths.</li>
-            </ol>
-          </aside>
-        </div>
-      </div>
-    </section>
-
     <!-- ========== ABOUT / EXPERIENCE ========== -->
     <section id="about" class="section section-alt">
       <div class="container">
         <header class="section-header">
-          <div class="meta-line"><span class="meta-bar"></span><span>05 / About</span></div>
+          <div class="meta-line"><span class="meta-bar"></span><span>04 / About</span></div>
           <h2 class="section-title">Domain depth meets system design.</h2>
         </header>
         <div class="about-grid">
@@ -555,7 +519,7 @@
     <!-- ========== CONTACT ========== -->
     <section id="contact" class="section section-final">
       <div class="container contact-inner">
-        <div class="meta-line meta-center"><span class="meta-bar"></span><span>06 / Contact</span></div>
+        <div class="meta-line meta-center"><span class="meta-bar"></span><span>05 / Contact</span></div>
         <h2 class="contact-title">Let's build something<br/>worth shipping.</h2>
         <p class="contact-sub">
           Open to consulting on AI/LLM platforms, prompt pipelines, and

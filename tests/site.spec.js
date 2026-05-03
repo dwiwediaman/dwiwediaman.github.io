@@ -33,7 +33,7 @@ test.describe("Portfolio site — end-to-end", () => {
   });
 
   test("nav links are present and resolve to in-page sections", async ({ page }) => {
-    const links = ["Work", "Projects", "Deep Dive", "About", "Contact"];
+    const links = ["Work", "Projects", "About", "Contact"];
     for (const text of links) {
       const link = page.locator(".nav-links a", { hasText: text }).first();
       const href = await link.getAttribute("href");
@@ -66,21 +66,22 @@ test.describe("Portfolio site — end-to-end", () => {
     await expect(cards.nth(2)).toContainText("Shabd");
   });
 
-  test("technical deep dive shows generic YAML example with illustrative marker", async ({ page }) => {
-    const file = page.locator(".code-block .code-file");
-    await expect(file).toContainText(/\.yaml$/);
-    await expect(file).toContainText(/example|illustrative|retail/i);
-    await expect(page.locator(".code-block .code-lang")).toContainText(/ILLUSTRATIVE|YAML/i);
-    await expect(page.locator(".code-body")).toContainText("framework");
-    await expect(page.locator(".dive-notes h4")).toContainText("config-as-contract");
-    const items = page.locator(".dive-list li");
+  test("architectural principles row renders 4 compact items above BeagleGPT cards", async ({ page }) => {
+    const items = page.locator("#work .principles li");
     await expect(items).toHaveCount(4);
+    // Confirms the four canonical principles are present
+    const text = await page.locator("#work .principles").innerText();
+    expect(text).toMatch(/domain velocity/i);
+    expect(text).toMatch(/auditable behavior/i);
+    expect(text).toMatch(/cost discipline/i);
+    expect(text).toMatch(/safe rollouts/i);
   });
 
-  test("YAML example contains no employer-specific identifiers", async ({ page }) => {
-    const code = await page.locator(".code-body").innerText();
-    // Internal references must not leak into the public sample
-    expect(code).not.toMatch(/decisionpoint|@decisionpoint|sell_out_analytics|\.v\d+\.j2/i);
+  test("dedicated technical deep dive section has been removed", async ({ page }) => {
+    // The section was consolidated; principles row replaces it
+    await expect(page.locator("#deep-dive")).toHaveCount(0);
+    await expect(page.locator(".code-block")).toHaveCount(0);
+    await expect(page.locator(".dive-notes")).toHaveCount(0);
   });
 
   test("about/stack section renders 4 stack groups", async ({ page }) => {
@@ -143,7 +144,7 @@ test.describe("Portfolio site — end-to-end", () => {
   });
 
   test("ALL major sections are visible (no IntersectionObserver invisibility regression)", async ({ page }) => {
-    const sections = ["#work", "#projects", "#deep-dive", "#about", "#contact"];
+    const sections = ["#work", "#projects", "#about", "#contact"];
     for (const sel of sections) {
       const el = page.locator(sel);
       await expect(el).toBeVisible();
