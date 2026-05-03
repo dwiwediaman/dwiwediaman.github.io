@@ -58,12 +58,14 @@ test.describe("Portfolio site — end-to-end", () => {
     expect(await arrowMarkers.count()).toBeGreaterThan(10);
   });
 
-  test("personal projects bento renders all three", async ({ page }) => {
+  test("personal projects bento renders the published cards (Shabd hidden until launch)", async ({ page }) => {
     const cards = page.locator("#projects .card");
-    await expect(cards).toHaveCount(3);
+    await expect(cards).toHaveCount(2);
     await expect(cards.nth(0)).toContainText("NSE Trading Agent");
     await expect(cards.nth(1)).toContainText("Dream11 IPL Optimizer");
-    await expect(cards.nth(2)).toContainText("Shabd");
+    // Shabd intentionally omitted while not yet shipped
+    const html = await page.content();
+    expect(html).not.toContain("Shabd");
   });
 
   test("architectural principles row renders 4 compact items above BeagleGPT cards", async ({ page }) => {
