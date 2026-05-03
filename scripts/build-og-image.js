@@ -134,22 +134,22 @@ const html = `<!doctype html><html><head><meta charset="utf-8"/>
     <div class="mark">RD</div>
     <div class="meta">
       <div class="name">Rahul Dwiwedi</div>
-      <div class="role">Technical Lead · AI Systems</div>
+      <div class="role">Technical Lead · Decision Point (a LatentView company)</div>
     </div>
     <div class="pill"><span class="dot"></span>Open to inquiries</div>
   </div>
 
   <div class="center">
     <div class="eyebrow">Portfolio</div>
-    <h1>I architect <em>production-grade</em><br/>AI systems for the enterprise.</h1>
+    <h1>Architecting <em>BeagleGPT</em><br/>for the Fortune 500 CPG enterprise.</h1>
   </div>
 
   <div class="bottom">
     <div class="url">dwiwediaman.github.io</div>
     <div class="tags">
-      <span class="tag">LLM Pipelines</span>
+      <span class="tag">GenAI Knowledge Assistant</span>
       <span class="tag">Azure Databricks</span>
-      <span class="tag">CPG Analytics</span>
+      <span class="tag">RAG · Eval</span>
     </div>
   </div>
 </body></html>`;

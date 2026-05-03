@@ -28,7 +28,8 @@ test.describe("Portfolio site — end-to-end", () => {
     await expect(page.locator(".hero-cta a", { hasText: "Get in Touch" })).toBeVisible();
     await expect(page.locator(".hero-panel")).toBeVisible();
     await expect(page.locator(".hero-panel")).toContainText("Technical Lead");
-    await expect(page.locator(".hero-panel")).toContainText("Decisionpoint");
+    await expect(page.locator(".hero-panel")).toContainText("Decision Point");
+    await expect(page.locator(".hero-panel")).toContainText("LatentView");
   });
 
   test("nav links are present and resolve to in-page sections", async ({ page }) => {
@@ -42,15 +43,17 @@ test.describe("Portfolio site — end-to-end", () => {
     }
   });
 
-  test("featured work shows both flagship platforms with diagrams", async ({ page }) => {
+  test("featured work shows BeagleGPT flagship with two named capabilities", async ({ page }) => {
+    // BeagleGPT is the platform (named in section header), with two capability cards
     const features = page.locator(".feature");
     await expect(features).toHaveCount(2);
     await expect(page.locator(".feature-title", { hasText: "Deep Research" })).toBeVisible();
-    await expect(page.locator(".feature-title", { hasText: "BeagleGPT" })).toBeVisible();
-    // Architecture diagrams render
+    await expect(page.locator(".feature-title", { hasText: "Conversational Copilot" })).toBeVisible();
+    // Section header names BeagleGPT explicitly
+    await expect(page.locator("#work .section-title")).toContainText("BeagleGPT");
+    // Architecture diagrams render with arrow markers from global defs
     const archSvgs = page.locator(".arch-svg");
     await expect(archSvgs).toHaveCount(2);
-    // Both diagrams have arrow markers wired to the global <defs>
     const arrowMarkers = page.locator('line[marker-end="url(#arrow)"]');
     expect(await arrowMarkers.count()).toBeGreaterThan(10);
   });
@@ -63,12 +66,21 @@ test.describe("Portfolio site — end-to-end", () => {
     await expect(cards.nth(2)).toContainText("Shabd");
   });
 
-  test("technical deep dive shows YAML and notes", async ({ page }) => {
-    await expect(page.locator(".code-block .code-file")).toContainText("sell_out_analytics.yaml");
+  test("technical deep dive shows generic YAML example with illustrative marker", async ({ page }) => {
+    const file = page.locator(".code-block .code-file");
+    await expect(file).toContainText(/\.yaml$/);
+    await expect(file).toContainText(/example|illustrative|retail/i);
+    await expect(page.locator(".code-block .code-lang")).toContainText(/ILLUSTRATIVE|YAML/i);
     await expect(page.locator(".code-body")).toContainText("framework");
     await expect(page.locator(".dive-notes h4")).toContainText("config-as-contract");
     const items = page.locator(".dive-list li");
     await expect(items).toHaveCount(4);
+  });
+
+  test("YAML example contains no employer-specific identifiers", async ({ page }) => {
+    const code = await page.locator(".code-body").innerText();
+    // Internal references must not leak into the public sample
+    expect(code).not.toMatch(/decisionpoint|@decisionpoint|sell_out_analytics|\.v\d+\.j2/i);
   });
 
   test("about/stack section renders 4 stack groups", async ({ page }) => {
