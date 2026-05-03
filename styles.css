@@ -684,6 +684,12 @@ a:focus-visible {
   grid-auto-rows: min-content;
   gap: 20px;
 }
+/* Single card while siblings are hidden — center-aligned, ~half-width
+   so it doesn't sprawl across an empty row. */
+.bento-solo {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
 .card {
   background: var(--bg-elev);
   border: 1px solid var(--line);

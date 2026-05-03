@@ -58,14 +58,16 @@ test.describe("Portfolio site — end-to-end", () => {
     expect(await arrowMarkers.count()).toBeGreaterThan(10);
   });
 
-  test("personal projects bento renders the published cards (Shabd hidden until launch)", async ({ page }) => {
+  test("personal projects bento renders only NSE (Dream11 + Shabd hidden until launch)", async ({ page }) => {
     const cards = page.locator("#projects .card");
-    await expect(cards).toHaveCount(2);
+    await expect(cards).toHaveCount(1);
     await expect(cards.nth(0)).toContainText("NSE Trading Agent");
-    await expect(cards.nth(1)).toContainText("Dream11 IPL Optimizer");
-    // Shabd intentionally omitted while not yet shipped
+    // Hidden projects must not leak through
     const html = await page.content();
     expect(html).not.toContain("Shabd");
+    expect(html).not.toContain("Dream11");
+    // Solo modifier ensures the single card doesn't leave an empty grid cell
+    await expect(page.locator("#projects .bento")).toHaveClass(/bento-solo/);
   });
 
   test("architectural principles row renders 4 compact items above BeagleGPT cards", async ({ page }) => {
